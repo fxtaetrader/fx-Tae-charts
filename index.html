@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FX Tae Charts - Professional Forex Trading Education</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #1a237e;
+            --secondary: #00bcd4;
+            --accent: #ff9800;
+            --dark: #0d153a;
+            --light: #f5f7ff;
+            --success: #4caf50;
+            --text: #333;
+            --text-light: #666;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .logo .forex {
+            color: var(--secondary);
+        }
+        
+        .logo .charts {
+            color: var(--accent);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: color 0.3s;
+            padding: 5px 0;
+            position: relative;
+        }
+        
+        nav ul li a:hover {
+            color: var(--secondary);
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            left: 0;
+            bottom: 0;
+            transition: width 0.3s;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(13, 21, 58, 0.85), rgba(13, 21, 58, 0.9)), url('https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .hero h2 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 152, 0, 0.3);
+        }
+        
+        .cta-button:hover {
+            background: #ff8a00;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 152, 0, 0.4);
+        }
+        
+        /* Section Common Styles */
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 4px;
+            background: var(--secondary);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .section-title p {
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Courses Section */
+        .courses-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .course-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .course-header {
+            background: var(--primary);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .course-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .price {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+        
+        .course-body {
+            padding: 25px;
+        }
+        
+        .course-features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+        
+        .course-features li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+        
+        .course-features li i {
+            color: var(--success);
+            margin-right: 10px;
+        }
+        
+        .enroll-btn {
+            display: block;
+            width: 100%;
+            background: var(--secondary);
+            color: white;
+            text-align: center;
+            padding: 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        
+        .enroll-btn:hover {
+            background: #00a5bb;
+        }
+        
+        /* Free Courses Section */
+        .free-courses {
+            background: #f9fafd;
+        }
+        
+        .resources-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+        
+        .resource-tab {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            width: 100%;
+            max-width: 550px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .resource-tab h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--secondary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .resource-list {
+            list-style: none;
+        }
+        
+        .resource-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+        
+        .resource-list li i {
+            color: var(--secondary);
+            margin-right: 10px;
+            width: 20px;
+        }
+        
+        /* Mentorship Section */
+        .mentorship-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .mentorship-content h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .mentorship-features {
+            list-style: none;
+            margin: 25px 0;
+        }
+        
+        .mentorship-features li {
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .mentorship-features li i {
+            color: var(--success);
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .mentorship-image {
+            text-align: center;
+        }
+        
+        .mentorship-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Signals Section */
+        .signals-container {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
+            border-radius: 15px;
+            padding: 50px;
+            color: white;
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .signals-container h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        
+        .signals-container p {
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .telegram-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #0088cc;
+            color: white;
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+        
+        .telegram-btn:hover {
+            background: #0077b5;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 136, 204, 0.3);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 70px 0 20px;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+        
+        .footer-logo p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+        
+        .footer-links h3, .footer-social h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links ul li a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links ul li a:hover {
+            color: var(--secondary);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h2 {
+                font-size: 2.3rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .signals-container {
+                padding: 40px 30px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: var(--dark);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            }
+            
+            nav ul.active {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero {
+                padding: 70px 0;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            .cta-button, .enroll-btn, .telegram-btn {
+                padding: 12px 25px;
+            }
+            
+            .course-card {
+                max-width: 100%;
+            }
+            
+            .signals-container {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-chart-line fa-2x"></i>
+                <h1>FX <span class="forex">Tae</span> <span class="charts">Charts</span></h1>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav>
+                <ul id="navMenu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#courses">Courses</a></li>
+                    <li><a href="#free-courses">Free Resources</a></li>
+                    <li><a href="#mentorship">Mentorship</a></li>
+                    <li><a href="#signals">Premium Signals</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h2>Master Forex Trading with FX Tae Charts</h2>
+            <p>Professional forex education, mentorship, and trading signals designed to transform beginners into confident traders and help experienced traders refine their strategies for consistent profitability.</p>
+            <a href="https://t.me/fx_tae_trading_circle" class="cta-button">Start Learning Today</a>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section id="courses">
+        <div class="container">
+            <div class="section-title">
+                <h2>Premium Forex Courses</h2>
+                <p>All our comprehensive course packages are available for a one-time payment of $120. No hidden fees, lifetime access.</p>
+            </div>
+            
+            <div class="courses-container">
+                <!-- Course 1 -->
+                <div class="course-card">
+                    <div class="course-header">
+                        <h3>Forex Fundamentals</h3>
+                        
+                        <p>One-time payment</p>
+                    </div>
+                    <div class="course-body">
+                        <ul class="course-features">
+                            <li><i class="fas fa-check-circle"></i> Complete beginner to intermediate guide</li>
+                            <li><i class="fas fa-check-circle"></i> Understanding currency pairs & market hours</li>
+                            <li><i class="fas fa-check-circle"></i> Fundamental analysis basics</li>
+                            <li><i class="fas fa-check-circle"></i> Risk management principles</li>
+                            <li><i class="fas fa-check-circle"></i> 12+ hours of video content</li>
+                            <li><i class="fas fa-check-circle"></i> Downloadable PDF guides</li>
+                        </ul>
+                        <a href="https://t.me/fx_tae_trading_circle" target="_blank" class="enroll-btn">Enroll via Telegram</a>
+                    </div>
+                </div>
+                
+                <!-- Course 2 -->
+                <div class="course-card">
+                    <div class="course-header">
+                        <h3>Technical Analysis Mastery</h3>
+                        
+                        <p>One-time payment</p>
+                    </div>
+                    <div class="course-body">
+                        <ul class="course-features">
+                            <li><i class="fas fa-check-circle"></i> Chart patterns & candlestick analysis</li>
+                            <li><i class="fas fa-check-circle"></i> Support & resistance strategies</li>
+                            <li><i class="fas fa-check-circle"></i> Indicators: RSI, MACD, Moving Averages</li>
+                            <li><i class="fas fa-check-circle"></i> Fibonacci retracement & extensions</li>
+                            <li><i class="fas fa-check-circle"></i> Multiple timeframe analysis</li>
+                            <li><i class="fas fa-check-circle"></i> 15+ hours of video content</li>
+                        </ul>
+                        <a href="https://t.me/fx_tae_trading_circle" target="_blank" class="enroll-btn">Enroll via Telegram</a>
+                    </div>
+                </div>
+                
+                <!-- Course 3 -->
+                <div class="course-card">
+                    <div class="course-header">
+                        <h3>Advanced Trading Strategies</h3>
+                        
+                        <p>One-time payment</p>
+                    </div>
+                    <div class="course-body">
+                        <ul class="course-features">
+                            <li><i class="fas fa-check-circle"></i> Price action trading systems</li>
+                            <li><i class="fas fa-check-circle"></i> Scalping & day trading techniques</li>
+                            <li><i class="fas fa-check-circle"></i> Swing trading strategies</li>
+                            <li><i class="fas fa-check-circle"></i> Psychology of trading</li>
+                            <li><i class="fas fa-check-circle"></i> Building a personalized trading plan</li>
+                            <li><i class="fas fa-check-circle"></i> Live trading sessions included</li>
+                        </ul>
+                        <a href="https://t.me/fx_tae_trading_circle" target="_blank" class="enroll-btn">Enroll via Telegram</a>
+                    </div>
+                </div>
+                <!-- Course 3 -->
+                <div class="course-card">
+                    <div class="course-header">
+                        <h3>STUDY ALL COURSES</h3>
+                        
+                        <p>Get all courses in a single purchase</p>
+                    </div>
+                    <div class="course-body">
+                        <div class="section-title">
+                <h2>$120</h2>
+                
+            </div>
+                        <a href="https://t.me/fx_tae" target="_blank" class="enroll-btn">Enroll via Telegram</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Free Courses Section -->
+    <section class="free-courses" id="free-courses">
+        <div class="container">
+            <div class="section-title">
+                <h2>Free Learning Resources</h2>
+                <p>Access our collection of free documents and video tutorials to start your forex trading journey at no cost.</p>
+            </div>
+            
+            <div class="resources-container">
+                <div class="resource-tab">
+                    <h3><i class="fas fa-file-pdf"></i> Free Documents</h3>
+                    <ul class="resource-list">
+                        <li><i class="fas fa-download"></i> Forex Trading Glossary - PDF</li>
+                        <li><i class="fas fa-download"></i> Beginner's Guide to Currency Pairs</li>
+                        <li><i class="fas fa-download"></i> Risk Management Checklist</li>
+                        <li><i class="fas fa-download"></i> Trading Journal Template</li>
+                        <li><i class="fas fa-download"></i> Economic Calendar Guide</li>
+                        <li><i class="fas fa-download"></i> Broker Selection Checklist</li>
+                        <li><i class="fas fa-download"></i> Common Trading Mistakes to Avoid</li>
+                    </ul>
+                </div>
+                
+                <div class="resource-tab">
+                    <h3><i class="fas fa-video"></i> Free Video Tutorials</h3>
+                    <ul class="resource-list">
+                        <li><i class="fas fa-play-circle"></i> Introduction to Forex Markets</li>
+                        <li><i class="fas fa-play-circle"></i> How to Read a Forex Quote</li>
+                        <li><i class="fas fa-play-circle"></i> Setting Up Your First Trade</li>
+                        <li><i class="fas fa-play-circle"></i> Understanding Pips & Lots</li>
+                        <li><i class="fas fa-play-circle"></i> Basic Chart Patterns Explained</li>
+                        <li><i class="fas fa-play-circle"></i> Introduction to MetaTrader 4/5</li>
+                        <li><i class="fas fa-play-circle"></i> Psychology for Beginner Traders</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <p><strong>Access all free resources by joining our Telegram channel:</strong></p>
+                <a href="https://t.me/fx_tae_trading_circle" target="_blank" class="cta-button" style="margin-top: 15px;">
+                    <i class="fab fa-telegram-plane"></i> Join Free Resources Channel
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mentorship Section -->
+    <section id="mentorship">
+        <div class="container">
+            <div class="section-title">
+                <h2>One-on-One Mentorship Program</h2>
+                <p>Get personalized guidance from experienced forex traders to accelerate your learning curve and avoid costly mistakes.</p>
+            </div>
+            
+            <div class="mentorship-container">
+                <div class="mentorship-content">
+                    <h3>Personalized Trading Education</h3>
+                    <p>Our one-on-one mentorship program is designed for traders who want direct access to an experienced forex professional. Whether you're just starting or looking to refine your strategies, our mentors provide tailored guidance.</p>
+                    
+                    <ul class="mentorship-features">
+                        <li><i class="fas fa-check"></i> Weekly one-on-one video sessions</li>
+                        <li><i class="fas fa-check"></i> Personalized trading plan development</li>
+                        <li><i class="fas fa-check"></i> Live market analysis and trade reviews</li>
+                        <li><i class="fas fa-check"></i> Direct feedback on your trading journal</li>
+                        <li><i class="fas fa-check"></i> Psychological coaching and mindset training</li>
+                        <li><i class="fas fa-check"></i> Priority access to all course materials</li>
+                    </ul>
+                    
+                    <p style="margin-top: 20px; font-weight: 600; color: var(--primary);">Mentorship Program Fee: $190/month</p>
+                    
+                    <a href="https://t.me/fx_tae" target="_blank" class="cta-button" style="margin-top: 20px;">
+                        <i class="fab fa-telegram-plane"></i> Inquire About Mentorship
+                    </a>
+                </div>
+                
+                <div class="mentorship-image">
+                    <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Forex Mentorship">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Telegram Premium Signals Section -->
+    <section id="signals">
+        <div class="container">
+            <div class="section-title">
+                <h2>Telegram Premium Signals</h2>
+                <p>Join our exclusive Telegram channel for daily forex trading signals with detailed entry, stop loss, and take profit levels.</p>
+            </div>
+            
+            <div class="signals-container">
+                <h3>Professional Trading Signals Delivered Daily</h3>
+                <p>Our team of experienced analysts provides 3-5 high-probability forex signals per day with clear instructions. Each signal includes entry price, stop loss, take profit levels, and the rationale behind the trade. Perfect for traders who want to follow proven strategies or learn from professional analysis.</p>
+                
+                <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px;">
+                    <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; min-width: 200px;">
+                        <h4 style="color: var(--accent); margin-bottom: 10px;">Signal Features</h4>
+                        <ul style="list-style: none; text-align: left;">
+                            <li><i class="fas fa-check" style="color: var(--success); margin-right: 8px;"></i> 3-5 signals daily</li>
+                            <li><i class="fas fa-check" style="color: var(--success); margin-right: 8px;"></i> Detailed analysis</li>
+                            <li><i class="fas fa-check" style="color: var(--success); margin-right: 8px;"></i> Risk management guidance</li>
+                            <li><i class="fas fa-check" style="color: var(--success); margin-right: 8px;"></i> Performance tracking</li>
+                        </ul>
+                    </div>
+                    
+                    <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; min-width: 200px;">
+                        <h4 style="color: var(--accent); margin-bottom: 10px;">Subscription Plans</h4>
+                        <ul style="list-style: none; text-align: left;">
+                            <li><i class="fas fa-crown" style="color: gold; margin-right: 8px;"></i> Weekly: $15</li>
+                            <li><i class="fas fa-crown" style="color: silver; margin-right: 8px;"></i> Monthly: $50</li>
+                            <li><i class="fas fa-crown" style="color: #cd7f32; margin-right: 8px;"></i> Annually: $480</li>
+                            <li><i class="fas fa-star" style="color: var(--secondary); margin-right: 8px;"></i> Best Value!</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <a href="https://t.me/fx_tae" target="_blank" class="telegram-btn" style="margin-top: 30px;">
+                    <i class="fab fa-telegram-plane"></i> Join Premium Signals Channel
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-logo">
+                    <h2>FX Tae Charts</h2>
+                    <p>Professional forex trading education since 2018. We've helped over 2,500 traders develop the skills and confidence to navigate the forex markets successfully.</p>
+                    <p style="margin-top: 15px; color: rgba(255,255,255,0.8);">
+                        <i class="fas fa-envelope" style="margin-right: 8px;"></i> fxtae.chartprogram@gmail.com
+                    </p>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#courses">Courses</a></li>
+                        <li><a href="#free-courses">Free Resources</a></li>
+                        <li><a href="#mentorship">Mentorship</a></li>
+                        <li><a href="#signals">Premium Signals</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-social">
+                    <h3>Connect With Us</h3>
+                    <p>Follow us on social media for daily tips, market analysis, and updates.</p>
+                    <div class="social-icons">
+                        <a href="https://facebook.com/profile.php?id=61570609291603" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://tiktok.com/@fx_tae_trader" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+                        <a href="https://instagram.com/fxtaetrader" target="_blank"><i class="fab fa-instagram"></i></a>
+                        
+                        <a href="https://wa.me/+256763209002?text=Hello%20FX%20Tae%20Charts%2C%20I%20would%20like%20to%20enroll%20in%20your%20forex%20training."  target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://t.me/fx_tae_trading_circle" target="_blank"><i class="fab fa-telegram-plane"></i></a>
+                    </div>
+                    <p style="margin-top: 20px; font-size: 0.9rem; color: rgba(255,255,255,0.7);">
+                        <strong>Primary Enrollment Channel:</strong><br>
+                        <a href="https://t.me/fx_tae_trading_circle" target="_blank" style="color: var(--secondary);">https://t.me/fx_tae_trading_circle</a>
+                    </p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 FX Tae Charts. All rights reserved. Forex trading involves substantial risk of loss and is not suitable for every investor.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            
+            // Change icon
+            const icon = mobileMenuBtn.querySelector('i');
+            if (icon.classList.contains('fa-bars')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (navMenu.classList.contains('active')) {
+                        navMenu.classList.remove('active');
+                        const icon = mobileMenuBtn.querySelector('i');
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                }
+            });
+        });
+        
+        // Highlight current section in navigation
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('nav a');
+            
+            let currentSection = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= (sectionTop - 100)) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentSection}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        // Add active class to home link by default
+        document.addEventListener('DOMContentLoaded', () => {
+            const homeLink = document.querySelector('nav a[href="#home"]');
+            if (homeLink) homeLink.classList.add('active');
+        });
+    </script>
+</body>
+</html>
